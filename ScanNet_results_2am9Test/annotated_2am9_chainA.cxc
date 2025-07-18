@@ -1,0 +1,9 @@
+open annotated_2am9_chainA.pdb 
+dssp
+hide atoms
+show cartoon
+color gray transparency 10
+surface #1/A
+color by bfactor #1/A range 0,0.7 transparency 0
+transparency 50
+lighting soft
