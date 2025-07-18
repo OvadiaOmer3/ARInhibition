@@ -1,0 +1,138 @@
+# ChimeraX script for Assembly 3 Interface Validation
+# This shows the actual protein-protein interface (heterodimer)
+
+# Open Assembly 3
+open ../5JJM-assembly3.pdb
+
+# Show surface
+surface
+
+# Color interface residues by distance cutoff: red (4Å), orange (6Å), yellow (8Å)
+
+# Chain A interface residues
+color #1.1/D:847 red
+color #1.1/D:848 red
+color #1.1/D:756 red
+color #1.1/D:758 red
+color #1.1/D:681 red
+color #1.1/D:684 red
+color #1.1/D:763 red
+color #1.1/D:760 red
+color #1.1/D:683 red
+color #1.1/D:798 red
+color #1.1/D:845 red
+color #1.1/D:678 red
+color #1.1/D:766 red
+color #1.1/D:802 red
+color #1.1/D:801 red
+color #1.1/D:754 red
+color #1.1/D:682 red
+color #1.1/D:800 orange
+color #1.1/D:755 orange
+color #1.1/D:757 orange
+color #1.1/D:799 orange
+color #1.1/D:674 orange
+color #1.1/D:795 orange
+color #1.1/D:751 orange
+color #1.1/D:794 orange
+color #1.1/D:805 orange
+color #1.1/D:679 orange
+color #1.1/D:752 orange
+color #1.1/D:844 orange
+color #1.1/D:686 orange
+color #1.1/D:677 orange
+color #1.1/D:854 yellow
+color #1.1/D:851 yellow
+color #1.1/D:841 yellow
+color #1.1/D:849 yellow
+color #1.1/D:671 yellow
+color #1.1/D:797 yellow
+color #1.1/D:761 yellow
+color #1.1/D:767 yellow
+color #1.1/D:796 yellow
+color #1.1/D:680 yellow
+color #1.1/D:769 yellow
+color #1.1/D:846 yellow
+color #1.1/D:804 yellow
+color #1.1/D:685 yellow
+color #1.1/D:850 yellow
+color #1.1/D:765 yellow
+color #1.1/D:675 yellow
+color #1.1/D:759 yellow
+color #1.1/D:714 yellow
+color #1.1/D:753 yellow
+color #1.1/D:855 yellow
+color #1.1/D:803 yellow
+color #1.1/D:792 yellow
+color #1.1/D:793 yellow
+color #1.1/D:840 yellow
+
+# Chain B interface residues
+color #1.2/D:847 red
+color #1.2/D:848 red
+color #1.2/D:756 red
+color #1.2/D:681 red
+color #1.2/D:758 red
+color #1.2/D:763 red
+color #1.2/D:684 red
+color #1.2/D:760 red
+color #1.2/D:683 red
+color #1.2/D:798 red
+color #1.2/D:845 red
+color #1.2/D:678 red
+color #1.2/D:766 red
+color #1.2/D:802 red
+color #1.2/D:754 red
+color #1.2/D:801 red
+color #1.2/D:682 red
+color #1.2/D:800 orange
+color #1.2/D:755 orange
+color #1.2/D:757 orange
+color #1.2/D:799 orange
+color #1.2/D:674 orange
+color #1.2/D:795 orange
+color #1.2/D:751 orange
+color #1.2/D:794 orange
+color #1.2/D:805 orange
+color #1.2/D:679 orange
+color #1.2/D:752 orange
+color #1.2/D:844 orange
+color #1.2/D:686 orange
+color #1.2/D:677 orange
+color #1.2/D:854 yellow
+color #1.2/D:851 yellow
+color #1.2/D:841 yellow
+color #1.2/D:849 yellow
+color #1.2/D:671 yellow
+color #1.2/D:797 yellow
+color #1.2/D:761 yellow
+color #1.2/D:767 yellow
+color #1.2/D:796 yellow
+color #1.2/D:680 yellow
+color #1.2/D:769 yellow
+color #1.2/D:846 yellow
+color #1.2/D:804 yellow
+color #1.2/D:685 yellow
+color #1.2/D:850 yellow
+color #1.2/D:765 yellow
+color #1.2/D:675 yellow
+color #1.2/D:759 yellow
+color #1.2/D:714 yellow
+color #1.2/D:753 yellow
+color #1.2/D:855 yellow
+color #1.2/D:803 yellow
+color #1.2/D:792 yellow
+color #1.2/D:793 yellow
+color #1.2/D:840 yellow
+
+# Set surface transparency
+surface transparency 50
+
+# Print information
+echo "Assembly 3 Interface Validation - Homodimer"
+echo "Red:  #1.1/D interface residues"
+echo "Blue: #1.2/D interface residues"
+echo "Distance cutoff: 4.0 Å"
+echo ""
+echo "This shows the actual protein-protein interface"
+echo "between the Androgen Receptor and its binding partner"

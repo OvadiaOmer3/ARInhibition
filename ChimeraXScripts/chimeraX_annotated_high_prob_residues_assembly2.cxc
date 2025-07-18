@@ -1,0 +1,67 @@
+# ChimeraX script for Consensus Residues
+    # Open Assembly 2
+    open ../5JJM-assembly2.pdb
+
+    # Show surface
+    surface
+
+    surface transparency 50
+    
+    color #1/B:850 red
+color #1/B:792 red
+color #1/B:758 red
+color #1/B:796 red
+color #1/B:686 red
+color #1/B:760 red
+color #1/B:795 red
+color #1/B:684 red
+color #1/B:675 red
+color #1/B:756 red
+color #1/B:754 red
+color #1/B:798 red
+color #1/B:761 red
+color #1/B:793 red
+color #1/B:766 red
+color #1/B:797 red
+color #1/B:759 red
+color #1/B:757 red
+color #1/B:755 red
+color #1/B:679 red
+color #1/B:683 red
+color #1/B:846 red
+color #1/B:671 red
+color #1/B:767 red
+color #1/B:763 red
+color #1/B:769 red
+color #1/B:685 red
+color #1/B:752 red
+color #1/B:848 red
+color #1/B:844 red
+color #1/B:845 red
+color #1/B:855 red
+color #1/B:847 red
+color #1/B:680 red
+color #1/B:802 red
+color #1/B:678 red
+color #1/B:751 red
+color #1/B:841 red
+color #1/B:851 red
+color #1/B:801 red
+color #1/B:800 red
+color #1/B:794 red
+color #1/B:682 red
+color #1/B:799 red
+color #1/B:674 red
+color #1/B:803 red
+color #1/B:765 red
+color #1/B:681 red
+color #1/B:804 red
+color #1/B:753 red
+color #1/B:805 red
+color #1/B:677 red
+label #1/B:850 text 'ScanNet Probability: 0.75'
+color #1/B:850 yellow
+label #1/B:792 text 'ScanNet Probability: 0.60'
+color #1/B:792 yellow
+label #1/B:758 text 'ScanNet Probability: 0.57'
+color #1/B:758 yellow
