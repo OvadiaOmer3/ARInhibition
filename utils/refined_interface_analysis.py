@@ -99,7 +99,15 @@ def calculate_refined_interface(pdb_file, chain1='B', chain2='C', distance_cutof
             results[f'{cutoff}A']['chain_b'].append(interface_b[b_idx][0])
             results[f'{cutoff}A']['chain_b_count'] += 1
             b_idx += 1
-            
+    # save residues to a txt file
+    with open(f"{RESULTS_DIR}/assembly_{ASSEMBLY_STRACTURES_IDS[2][0]}_{ASSEMBLY_STRACTURES_IDS[2][1]}_interface_residues.txt", "w") as f:
+        for cutoff, data in results.items():
+            f.write(f"{cutoff}:\n")
+            f.write(f"  Chain A: {data['chain_a_count']} residues\n")
+            f.write(f"  Chain B: {data['chain_b_count']} residues\n")
+            f.write(f"  Chain A residues: {data['chain_a']}\n")
+            f.write(f"  Chain B residues: {data['chain_b']}\n\n")
+    
     return results
 
 def analyze_assembly_detailed(assembly_number):
