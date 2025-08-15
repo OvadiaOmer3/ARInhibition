@@ -12,28 +12,45 @@ from Bio.PDB.PDBParser import PDBParser
 import warnings
 warnings.filterwarnings('ignore')
 
-
+# SCAN_NET_FILE = "ScanNet_results_2am9Test/predictions_2am9_chainA.csv"
 SCAN_NET_FILE = "ScanNet_results_1t5zTest/predictions_1t5z.csv"
+
+PDB_FILE_BASE = "5JJM-assembly"
+ASSEMBLY_NUMBERS = [1, 2, 3]
+RES_A_OFFSET = 0  # Residue numbering offset for PDB files
+RES_B_OFFSET = 0  # Residue numbering offset for PDB files
 CHIMERA_X_SCRIPT_DIR = "ChimeraXScripts/1t5z"
 RESULTS_DIR = "Results/1t5z"
+
+
+# PDB_FILE_BASE = "AlphaFoldRes/AF_binder_dimer_comp"
+# ASSEMBLY_NUMBERS = [""]
+# RES_A_OFFSET = 669  # Residue numbering offset for PDB files
+# RES_B_OFFSET = 0  # Residue numbering offset for PDB files
+# CHIMERA_X_SCRIPT_DIR = "ChimeraXScripts/AF_binder_dimer_comp"
+# RESULTS_DIR = "Results/AF_binder_dimer_comp"
+
+
 
 ASSEMBLY_STRACTURES_IDS = {
     1: ('1.1', '1.2'),
     2: ('1', '1'),
-    3: ('1.1', '1.2')
+    3: ('1.1', '1.2'),
+    "": ('1', '1')
 }
 
 # Define chain pairs for each assembly
 ASSEMBLY_CHAINS = {
     1: ('A', 'A'),  # Assembly 1: two A chains
     2: ('B', 'C'),      # Assembly 2: B and C chains
-    3: ('D', 'D')   # Assembly 3: two D chains
+    3: ('D', 'D'),   # Assembly 3: two D chains
+    "": ('A', 'C')
 }
 
 DISTANCE_CUTOFFS = [4.0, 6.0, 8.0]
 
 
-def calculate_refined_interface(pdb_file, chain1='B', chain2='C', distance_cutoffs=[4.0, 6.0, 8.0]):
+def calculate_refined_interface(pdb_file, chain1='B', chain2='C', distance_cutoffs=DISTANCE_CUTOFFS):
     """
     Calculate interface residues with multiple distance cutoffs
     """
@@ -67,13 +84,13 @@ def calculate_refined_interface(pdb_file, chain1='B', chain2='C', distance_cutof
                 for atom_b in residue_b:
                     distance = atom_a-atom_b
                     if distance <= max_cutoff:
-                        min_res_b_id = residue_b.get_id()[1]
+                        min_res_b_id = residue_b.get_id()[1] + RES_B_OFFSET
                         interface_b[min_res_b_id] = min(distance, interface_b.get(min_res_b_id, float('inf')))
                         if distance < min_distance:
                             min_distance = distance
     
         if min_distance <= max_cutoff:
-            interface_a[residue_a.get_id()[1]] = min_distance
+            interface_a[residue_a.get_id()[1] + RES_A_OFFSET] = min_distance
 
     # sort by distance
     interface_a = sorted(interface_a.items(), key=lambda x: x[1])
@@ -110,7 +127,7 @@ def analyze_assembly_detailed(assembly_number):
     report_lines.append(f"using {SCAN_NET_FILE} as ScanNet file\n")
     # Analyze with different distance cutoffs
     interface_data = calculate_refined_interface(
-        f"5JJM-assembly{assembly_number}.pdb",
+        f"{PDB_FILE_BASE}{assembly_number}.pdb",
         chain1=ASSEMBLY_CHAINS[assembly_number][0],
         chain2=ASSEMBLY_CHAINS[assembly_number][1],
         distance_cutoffs=DISTANCE_CUTOFFS
@@ -182,7 +199,7 @@ def create_validation_scripts(interface_data, assembly_number):
 # This shows the actual protein-protein interface (heterodimer)
 
 # Open Assembly {assembly_number}
-open ../5JJM-assembly{assembly_number}.pdb
+open {"../"*(CHIMERA_X_SCRIPT_DIR.count("/")+1)}{PDB_FILE_BASE}{assembly_number}.pdb
 
 # Show surface
 surface
@@ -209,12 +226,10 @@ surface transparency 50
 
 # Print information
 echo "Assembly {assembly_number} Interface Validation - Homodimer"
-echo "Red:  #{ASSEMBLY_STRACTURES_IDS[assembly_number][0]}/{ASSEMBLY_CHAINS[assembly_number][0]} interface residues"
-echo "Blue: #{ASSEMBLY_STRACTURES_IDS[assembly_number][1]}/{ASSEMBLY_CHAINS[assembly_number][1]} interface residues"
-echo "Distance cutoff: {DISTANCE_CUTOFFS[0]} Å"
+echo "#{ASSEMBLY_STRACTURES_IDS[assembly_number][0]}/{ASSEMBLY_CHAINS[assembly_number][0]} interface residues"
+echo "#{ASSEMBLY_STRACTURES_IDS[assembly_number][1]}/{ASSEMBLY_CHAINS[assembly_number][1]} interface residues"
+echo "Distance cutoff: {DISTANCE_CUTOFFS[-1]} Å"
 echo ""
-echo "This shows the actual protein-protein interface"
-echo "between the Androgen Receptor and its binding partner"
 """
     
     with open(f'{CHIMERA_X_SCRIPT_DIR}/chimeraX_assembly{assembly_number}_homodimer.cxc', 'w') as f:
@@ -227,24 +242,24 @@ def build_consensus_summary(interfaces) -> pd.DataFrame:
     # search for the most common interface residues
     surface_res_consensus = dict()
     scan_net_df = pd.read_csv(SCAN_NET_FILE)
-    for assembly_number in [1, 2, 3]:
+    for assembly_number in ASSEMBLY_NUMBERS:
         for cutoff, data in interfaces[assembly_number].items():
             for residue in data['chain_a']:
                 res_dict = surface_res_consensus.get(residue, dict([("Residue", residue)]))
                 res_dict['Count'] = res_dict.get('Count', 0) + 1
                 # Add ScanNet Probability
                 if any(scan_net_df['Residue Index'] == residue):
-                    res_dict['ScanNet Probability'] = scan_net_df[scan_net_df['Residue Index'] == residue]['Binding site probability'].values[0]
+                    res_dict['ScanNet Probability'] = scan_net_df[scan_net_df['Residue Index'] == residue]['Binding site probability'].iloc[0]
                 else:
                     res_dict['ScanNet Probability'] = 0
-                res_dict[f'Assembly {assembly_number}'] = True
+                res_dict[f'Assembly {assembly_number}'] = cutoff
                 surface_res_consensus[residue] = res_dict
     
     df =  pd.DataFrame(surface_res_consensus.values())
-    df[["Assembly 1", "Assembly 2", "Assembly 3"]] = df[["Assembly 1", "Assembly 2", "Assembly 3"]].fillna(False)
-    
+    for assembly_number in ASSEMBLY_NUMBERS:
+        df[f"Assembly {assembly_number}"] = df[f"Assembly {assembly_number}"].fillna(np.inf)
     # Sort by Count, ScanNet Probability, Residue
-    df = df.sort_values(by=['Count', 'ScanNet Probability', 'Residue'], ascending=[False, False, True])
+    df = df.sort_values(by=['Count', 'ScanNet Probability', 'Residue'] + [f"Assembly {assembly_number}" for assembly_number in ASSEMBLY_NUMBERS], ascending=[False, False, True] + [True] * len(ASSEMBLY_NUMBERS))
     return df
 
 
@@ -252,12 +267,23 @@ def create_chimeraX_script_for_consensus_residues(assembly_number, df):
     # Create a ChimeraX script that colors the consensus residues
     script_content = f"""# ChimeraX script for Consensus Residues
     # Open Assembly {assembly_number}
-    open ../5JJM-assembly{assembly_number}.pdb
+    open {"../"*(CHIMERA_X_SCRIPT_DIR.count("/")+1)}{PDB_FILE_BASE}{assembly_number}.pdb
 
     # Show surface
     surface
 
-    surface transparency 50
+    color gray
+
+    hide #{ASSEMBLY_STRACTURES_IDS[assembly_number][0]}
+    hide #{ASSEMBLY_STRACTURES_IDS[assembly_number][1]}
+    surface hide #{ASSEMBLY_STRACTURES_IDS[assembly_number][0]}
+    surface hide #{ASSEMBLY_STRACTURES_IDS[assembly_number][1]}
+
+    surface show #{ASSEMBLY_STRACTURES_IDS[assembly_number][0]}/{ASSEMBLY_CHAINS[assembly_number][0]}
+    surface show #{ASSEMBLY_STRACTURES_IDS[assembly_number][1]}/{ASSEMBLY_CHAINS[assembly_number][1]}
+
+    transparency #{ASSEMBLY_STRACTURES_IDS[assembly_number][0]}/{ASSEMBLY_CHAINS[assembly_number][0]} 0 surface 
+    transparency #{ASSEMBLY_STRACTURES_IDS[assembly_number][1]}/{ASSEMBLY_CHAINS[assembly_number][1]} 70 surface 
     
     """
 
@@ -282,7 +308,7 @@ def main():
 
     interfaces = dict()
     
-    for assembly_number in [1, 2, 3]:
+    for assembly_number in ASSEMBLY_NUMBERS:
         interface_data = analyze_assembly_detailed(assembly_number)
         if interface_data:
             interfaces[assembly_number] = interface_data
@@ -291,7 +317,7 @@ def main():
     
     # Build consensus summary DataFrame
     surface_res_consensus = build_consensus_summary(interfaces)
-    for assembly_number in [1, 2, 3]:
+    for assembly_number in ASSEMBLY_NUMBERS:
         create_chimeraX_script_for_consensus_residues(assembly_number, surface_res_consensus)
 
     # save surface_res_consensus to a csv file

@@ -2,7 +2,7 @@
 # This shows the actual protein-protein interface (heterodimer)
 
 # Open Assembly 2
-open ../5JJM-assembly2.pdb
+open ../../5JJM-assembly2.pdb
 
 # Show surface
 surface
@@ -131,9 +131,7 @@ surface transparency 50
 
 # Print information
 echo "Assembly 2 Interface Validation - Homodimer"
-echo "Red:  #1/B interface residues"
-echo "Blue: #1/C interface residues"
-echo "Distance cutoff: 4.0 Å"
+echo "#1/B interface residues"
+echo "#1/C interface residues"
+echo "Distance cutoff: 8.0 Å"
 echo ""
-echo "This shows the actual protein-protein interface"
-echo "between the Androgen Receptor and its binding partner"

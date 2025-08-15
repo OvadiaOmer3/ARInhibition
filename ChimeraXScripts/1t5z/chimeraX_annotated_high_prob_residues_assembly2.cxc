@@ -1,11 +1,22 @@
 # ChimeraX script for Consensus Residues
     # Open Assembly 2
-    open ../5JJM-assembly2.pdb
+    open ../../5JJM-assembly2.pdb
 
     # Show surface
     surface
 
-    surface transparency 50
+    color gray
+
+    hide #1
+    hide #1
+    surface hide #1
+    surface hide #1
+
+    surface show #1/B
+    surface show #1/C
+
+    transparency #1/B 0 surface 
+    transparency #1/C 70 surface 
     
     color #1/B:850 red
 color #1/B:796 red

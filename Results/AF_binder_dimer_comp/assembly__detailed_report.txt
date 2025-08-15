@@ -1,0 +1,54 @@
+=== Detailed Analysis of Assembly  (Homodimer) ===
+
+using ScanNet_results_1t5zTest/predictions_1t5z.csv as ScanNet file
+
+Interface residues with different distance cutoffs:
+
+4.0A cutoff:
+  A: 26 residues
+  C: 25 residues
+  A residues: [804, 680, 686, 757, 683, 719, 677, 672, 723, 681, 758, 682, 685, 674, 716, 712, 728, 688, 678, 807, 724, 722, 687, 753, 768, 725]
+  C residues: [37, 41, 17, 31, 14, 9, 35, 68, 3, 69, 72, 38, 10, 18, 73, 13, 20, 6, 21, 2, 34, 76, 25, 27, 65]
+
+6.0A cutoff:
+  A: 14 residues
+  C: 11 residues
+  A residues: [684, 676, 803, 806, 765, 720, 715, 769, 671, 726, 759, 690, 679, 673]
+  C residues: [33, 24, 7, 42, 66, 32, 30, 62, 11, 22, 74]
+
+8.0A cutoff:
+  A: 24 residues
+  C: 24 residues
+  A residues: [718, 754, 717, 756, 727, 721, 691, 689, 802, 767, 675, 760, 770, 836, 713, 847, 755, 810, 714, 735, 693, 708, 771, 843]
+  C residues: [39, 71, 50, 67, 8, 70, 16, 75, 1, 23, 5, 43, 15, 64, 4, 19, 77, 12, 61, 51, 36, 63, 26, 29]
+
+=== Comparison with ScanNet ===
+ScanNet high-probability residues: 24
+ScanNet residues: [684, 686, 692, 720, 726, 730, 734, 758, 772, 773, 776, 781, 789, 796, 849, 850, 853, 854, 856, 857, 861, 916, 917, 918]
+
+4.0A cutoff:
+  Interface residues: 26
+  Overlap: 2
+  Overlap percentage: 7.7%
+  Overlapping: [686, 758]
+  Interface-only: [672, 674, 677, 678, 680, 681, 682, 683, 685, 687, 688, 712, 716, 719, 722, 723, 724, 725, 728, 753, 757, 768, 804, 807]
+  ScanNet-only: [684, 692, 720, 726, 730, 734, 772, 773, 776, 781, 789, 796, 849, 850, 853, 854, 856, 857, 861, 916, 917, 918]
+
+6.0A cutoff:
+  Interface residues: 14
+  Overlap: 3
+  Overlap percentage: 21.4%
+  Overlapping: [684, 720, 726]
+  Interface-only: [671, 673, 676, 679, 690, 715, 759, 765, 769, 803, 806]
+  ScanNet-only: [686, 692, 730, 734, 758, 772, 773, 776, 781, 789, 796, 849, 850, 853, 854, 856, 857, 861, 916, 917, 918]
+
+8.0A cutoff:
+  Interface residues: 24
+  Overlap: 0
+  Overlap percentage: 0.0%
+  Overlapping: []
+  Interface-only: [675, 689, 691, 693, 708, 713, 714, 717, 718, 721, 727, 735, 754, 755, 756, 760, 767, 770, 771, 802, 810, 836, 843, 847]
+  ScanNet-only: [684, 686, 692, 720, 726, 730, 734, 758, 772, 773, 776, 781, 789, 796, 849, 850, 853, 854, 856, 857, 861, 916, 917, 918]
+
+Number of high-probability residues in interface: 5
+Percentage of high-probability residues in interface: 20.8%

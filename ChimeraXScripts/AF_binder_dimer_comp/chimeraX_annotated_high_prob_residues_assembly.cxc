@@ -1,0 +1,21 @@
+# ChimeraX script for Consensus Residues
+    # Open Assembly 
+    open ../../AlphaFoldRes/AF_binder_dimer_comp.pdb
+
+    # Show surface
+    surface
+
+    color gray
+
+    hide #1
+    hide #1
+    surface hide #1
+    surface hide #1
+
+    surface show #1/A
+    surface show #1/C
+
+    transparency #1/A 0 surface 
+    transparency #1/C 70 surface 
+    
+    

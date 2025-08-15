@@ -1,0 +1,148 @@
+# ChimeraX script for Assembly  Interface Validation
+# This shows the actual protein-protein interface (heterodimer)
+
+# Open Assembly 
+open ../../AlphaFoldRes/AF_binder_dimer_comp.pdb
+
+# Show surface
+surface
+
+# Color interface residues by distance cutoff: red (4Å), orange (6Å), yellow (8Å)
+
+# Chain A interface residues
+color #1/A:804 red
+color #1/A:680 red
+color #1/A:686 red
+color #1/A:757 red
+color #1/A:683 red
+color #1/A:719 red
+color #1/A:677 red
+color #1/A:672 red
+color #1/A:723 red
+color #1/A:681 red
+color #1/A:758 red
+color #1/A:682 red
+color #1/A:685 red
+color #1/A:674 red
+color #1/A:716 red
+color #1/A:712 red
+color #1/A:728 red
+color #1/A:688 red
+color #1/A:678 red
+color #1/A:807 red
+color #1/A:724 red
+color #1/A:722 red
+color #1/A:687 red
+color #1/A:753 red
+color #1/A:768 red
+color #1/A:725 red
+color #1/A:684 orange
+color #1/A:676 orange
+color #1/A:803 orange
+color #1/A:806 orange
+color #1/A:765 orange
+color #1/A:720 orange
+color #1/A:715 orange
+color #1/A:769 orange
+color #1/A:671 orange
+color #1/A:726 orange
+color #1/A:759 orange
+color #1/A:690 orange
+color #1/A:679 orange
+color #1/A:673 orange
+color #1/A:718 yellow
+color #1/A:754 yellow
+color #1/A:717 yellow
+color #1/A:756 yellow
+color #1/A:727 yellow
+color #1/A:721 yellow
+color #1/A:691 yellow
+color #1/A:689 yellow
+color #1/A:802 yellow
+color #1/A:767 yellow
+color #1/A:675 yellow
+color #1/A:760 yellow
+color #1/A:770 yellow
+color #1/A:836 yellow
+color #1/A:713 yellow
+color #1/A:847 yellow
+color #1/A:755 yellow
+color #1/A:810 yellow
+color #1/A:714 yellow
+color #1/A:735 yellow
+color #1/A:693 yellow
+color #1/A:708 yellow
+color #1/A:771 yellow
+color #1/A:843 yellow
+
+# Chain B interface residues
+color #1/C:37 red
+color #1/C:41 red
+color #1/C:17 red
+color #1/C:31 red
+color #1/C:14 red
+color #1/C:9 red
+color #1/C:35 red
+color #1/C:68 red
+color #1/C:3 red
+color #1/C:69 red
+color #1/C:72 red
+color #1/C:38 red
+color #1/C:10 red
+color #1/C:18 red
+color #1/C:73 red
+color #1/C:13 red
+color #1/C:20 red
+color #1/C:6 red
+color #1/C:21 red
+color #1/C:2 red
+color #1/C:34 red
+color #1/C:76 red
+color #1/C:25 red
+color #1/C:27 red
+color #1/C:65 red
+color #1/C:33 orange
+color #1/C:24 orange
+color #1/C:7 orange
+color #1/C:42 orange
+color #1/C:66 orange
+color #1/C:32 orange
+color #1/C:30 orange
+color #1/C:62 orange
+color #1/C:11 orange
+color #1/C:22 orange
+color #1/C:74 orange
+color #1/C:39 yellow
+color #1/C:71 yellow
+color #1/C:50 yellow
+color #1/C:67 yellow
+color #1/C:8 yellow
+color #1/C:70 yellow
+color #1/C:16 yellow
+color #1/C:75 yellow
+color #1/C:1 yellow
+color #1/C:23 yellow
+color #1/C:5 yellow
+color #1/C:43 yellow
+color #1/C:15 yellow
+color #1/C:64 yellow
+color #1/C:4 yellow
+color #1/C:19 yellow
+color #1/C:77 yellow
+color #1/C:12 yellow
+color #1/C:61 yellow
+color #1/C:51 yellow
+color #1/C:36 yellow
+color #1/C:63 yellow
+color #1/C:26 yellow
+color #1/C:29 yellow
+
+# Set surface transparency
+surface transparency 50
+
+# Print information
+echo "Assembly  Interface Validation - Homodimer"
+echo "#1/A interface residues"
+echo "#1/C interface residues"
+echo "Distance cutoff: 8.0 Å"
+echo ""
