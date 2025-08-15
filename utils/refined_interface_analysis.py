@@ -23,7 +23,7 @@ SCAN_NET_FILE = "Results/ScanNet_results_1t5zTest/predictions_1t5z.csv"
 # RESULTS_DIR = "Results/1t5z_manual_script"
 
 
-PDB_FILE_BASE = "AlphaFoldRes/AF_binder_dimer_comp"
+PDB_FILE_BASE = "Results/AlphaFoldRes/AF_binder_dimer_comp"
 ASSEMBLY_NUMBERS = [""]
 RES_A_OFFSET = 669  # Residue numbering offset for PDB files
 RES_B_OFFSET = 0  # Residue numbering offset for PDB files
