@@ -1,6 +1,6 @@
 === Detailed Analysis of Assembly  (Homodimer) ===
 
-using ScanNet_results_1t5zTest/predictions_1t5z.csv as ScanNet file
+using Results/ScanNet_results_1t5zTest/predictions_1t5z.csv as ScanNet file
 
 Interface residues with different distance cutoffs:
 
