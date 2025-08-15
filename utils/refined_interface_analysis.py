@@ -12,23 +12,23 @@ from Bio.PDB.PDBParser import PDBParser
 import warnings
 warnings.filterwarnings('ignore')
 
-# SCAN_NET_FILE = "ScanNet_results_2am9Test/predictions_2am9_chainA.csv"
-SCAN_NET_FILE = "ScanNet_results_1t5zTest/predictions_1t5z.csv"
+# SCAN_NET_FILE = "Results/ScanNet_results_2am9Test/predictions_2am9_chainA.csv"
+SCAN_NET_FILE = "Results/ScanNet_results_1t5zTest/predictions_1t5z.csv"
 
-PDB_FILE_BASE = "5JJM-assembly"
-ASSEMBLY_NUMBERS = [1, 2, 3]
-RES_A_OFFSET = 0  # Residue numbering offset for PDB files
-RES_B_OFFSET = 0  # Residue numbering offset for PDB files
-CHIMERA_X_SCRIPT_DIR = "ChimeraXScripts/1t5z"
-RESULTS_DIR = "Results/1t5z"
-
-
-# PDB_FILE_BASE = "AlphaFoldRes/AF_binder_dimer_comp"
-# ASSEMBLY_NUMBERS = [""]
-# RES_A_OFFSET = 669  # Residue numbering offset for PDB files
+# PDB_FILE_BASE = "references/5JJM-assembly"
+# ASSEMBLY_NUMBERS = [1, 2, 3]
+# RES_A_OFFSET = 0  # Residue numbering offset for PDB files
 # RES_B_OFFSET = 0  # Residue numbering offset for PDB files
-# CHIMERA_X_SCRIPT_DIR = "ChimeraXScripts/AF_binder_dimer_comp"
-# RESULTS_DIR = "Results/AF_binder_dimer_comp"
+# CHIMERA_X_SCRIPT_DIR = "ChimeraXScripts/1t5z"
+# RESULTS_DIR = "Results/1t5z_manual_script"
+
+
+PDB_FILE_BASE = "AlphaFoldRes/AF_binder_dimer_comp"
+ASSEMBLY_NUMBERS = [""]
+RES_A_OFFSET = 669  # Residue numbering offset for PDB files
+RES_B_OFFSET = 0  # Residue numbering offset for PDB files
+CHIMERA_X_SCRIPT_DIR = "ChimeraXScripts/AF_binder_dimer_comp"
+RESULTS_DIR = "Results/AF_binder_dimer_comp"
 
 
 
@@ -116,7 +116,15 @@ def calculate_refined_interface(pdb_file, chain1='B', chain2='C', distance_cutof
             results[f'{cutoff}A']['chain_b'].append(interface_b[b_idx][0])
             results[f'{cutoff}A']['chain_b_count'] += 1
             b_idx += 1
-            
+    # save residues to a txt file
+    with open(f"{RESULTS_DIR}/assembly_{ASSEMBLY_STRACTURES_IDS[2][0]}_{ASSEMBLY_STRACTURES_IDS[2][1]}_interface_residues.txt", "w") as f:
+        for cutoff, data in results.items():
+            f.write(f"{cutoff}:\n")
+            f.write(f"  Chain A: {data['chain_a_count']} residues\n")
+            f.write(f"  Chain B: {data['chain_b_count']} residues\n")
+            f.write(f"  Chain A residues: {data['chain_a']}\n")
+            f.write(f"  Chain B residues: {data['chain_b']}\n\n")
+    
     return results
 
 def analyze_assembly_detailed(assembly_number):

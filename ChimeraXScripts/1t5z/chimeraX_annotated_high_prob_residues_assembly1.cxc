@@ -1,6 +1,6 @@
 # ChimeraX script for Consensus Residues
     # Open Assembly 1
-    open ../../5JJM-assembly1.pdb
+    open ../../references/5JJM-assembly1.pdb
 
     # Show surface
     surface

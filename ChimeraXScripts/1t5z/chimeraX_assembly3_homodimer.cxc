@@ -2,7 +2,7 @@
 # This shows the actual protein-protein interface (heterodimer)
 
 # Open Assembly 3
-open ../../5JJM-assembly3.pdb
+open ../../references/5JJM-assembly3.pdb
 
 # Show surface
 surface
