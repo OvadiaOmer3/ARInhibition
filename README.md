@@ -164,4 +164,4 @@ This project requires the following tools (assumed to be installed):
 
 ## Contributing
 
-This project was developed as part of a Computational Structural Biology course. The analysis pipeline can be extended to other protein systems by modifying the configuration variables in the utility scripts. 
+This project was developed as part of a Computational Structural Biology course at Tel Aviv University. The analysis pipeline can be extended to other protein systems by modifying the configuration variables in the utility scripts. 
